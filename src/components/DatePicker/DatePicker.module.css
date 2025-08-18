@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  max-width: 600px;
+  width: 100%;
+  color: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.arrow {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 10px;
+  background-image: url("../../assets/arrow-right.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

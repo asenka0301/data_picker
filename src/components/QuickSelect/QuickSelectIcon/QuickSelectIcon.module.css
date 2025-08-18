@@ -1,0 +1,25 @@
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 0 5px;
+}
+
+.popoverTriggerIcon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../../../assets/calendar.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.popoverTriggerChevron {
+  display: block;
+  width: 16px;
+  height: 12px;
+  background-image: url("../../../assets/shevron.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
