@@ -3,6 +3,7 @@ import { useState } from "react";
 import { formatDate } from "../../utils/formatDate";
 import { sub } from "date-fns";
 import QuickSelectIcon from "../QuickSelect/QuickSelectIcon/QuickSelectIcon";
+import Popover from "../Popover/Popover";
 
 const DatePicker = () => {
   const [startDate] = useState<Date>(() => sub(new Date(), { minutes: 30 }));
@@ -10,9 +11,13 @@ const DatePicker = () => {
   return (
     <div className={styles.container}>
       <QuickSelectIcon />
-      <div>{formatDate(startDate)}</div>
+      <Popover title={formatDate(startDate)}>
+        <div>Data</div>
+      </Popover>
       <span className={styles.arrow}></span>
-      <div>{formatDate(endDate)}</div>
+      <Popover title={formatDate(endDate)}>
+        <div>Data</div>
+      </Popover>
     </div>
   );
 };
