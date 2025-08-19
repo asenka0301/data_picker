@@ -1,6 +1,8 @@
 .tabs {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
   gap: 10px;
 }
 
@@ -10,7 +12,35 @@
 
 .tabList {
   display: flex;
+  flex-grow: 1;
+  width: 100%;
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.listItem {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 5px 10px;
+}
+
+.active {
+  border-bottom: 2px solid var(--blue);
+}
+
+.active > .tabBtn {
+  color: var(--blue);
+}
+
+.tabBtn {
+  font-weight: 700;
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+
+.tabPanel {
+  padding: 0 5px;
 }

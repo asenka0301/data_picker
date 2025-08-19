@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   height: 40px;
-  max-width: 600px;
   width: 100%;
   color: var(--dark);
   border: 1px solid var(--border);

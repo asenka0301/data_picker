@@ -36,7 +36,10 @@ const TabList: FC<TabsListProps> = ({
             const id = tab.props.id;
             const isActive = activeTab === id;
             return (
-              <li key={`tab-${id}`}>
+              <li
+                key={`tab-${id}`}
+                className={`${styles.listItem} ${isActive && styles.active}`}
+              >
                 <button
                   role="tab"
                   id={`tab-${id}`}
@@ -46,7 +49,7 @@ const TabList: FC<TabsListProps> = ({
                     setActiveTab(id);
                     if (id === "abs") onAbsTabClick?.();
                   }}
-                  className={`tab-btn ${isActive ? "tab-btn--active" : ""}`}
+                  className={styles.tabBtn}
                 >
                   {tab.props.label}
                 </button>
@@ -66,6 +69,7 @@ const TabList: FC<TabsListProps> = ({
             id={`panel-${id}`}
             aria-labelledby={`tab-${id}`}
             hidden={!isActive}
+            className={styles.tabPanel}
           >
             {tab.props.children}
           </div>
