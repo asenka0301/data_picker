@@ -1,7 +1,7 @@
 import styles from "./DatePicker.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
-import { formatDate } from "../../utils/formatDate";
+import { useEffect, useState } from "react";
+import { formatDate, toDuration, type Unit } from "../../utils/formatDate";
 import DatePicker from "react-datepicker";
 import { sub } from "date-fns";
 import { enUS } from "date-fns/locale";
@@ -11,23 +11,30 @@ import TabList from "../Tabs/TabList";
 import TabItem from "../Tabs/TabItem";
 import { roundToMinutes } from "../../utils/roundToMinutes";
 import StartDateInput from "../StartDateInput/StartDateInput";
+import RelativeDatePicker from "../RelativeDatePicker/RelativeDatePicker";
 
 const DatePickerComponent = () => {
-  const [startDate, setStartDate] = useState<Date>(() =>
-    sub(new Date(), { minutes: 30 })
+  const [duration, setDuration] = useState<number>(30);
+  const [unit, setUnit] = useState<Unit>("m");
+  const [start, setStart] = useState<Date>(() =>
+    sub(new Date(), toDuration(duration, unit))
   );
   const [endDate] = useState<Date>(() => new Date());
-  const selected = roundToMinutes(startDate ?? new Date(), 30);
+
+  useEffect(() => {
+    const next = sub(new Date(), toDuration(duration, unit));
+    setStart(next);
+  }, [duration, unit]);
 
   return (
     <div className={styles.container}>
       <QuickSelectIcon />
-      <Popover title={formatDate(startDate)}>
+      <Popover title={formatDate(start)}>
         <TabList defaultActive="rel">
           <TabItem label="Absolute" id="abs">
             <DatePicker
-              selected={selected}
-              onChange={(d) => d && setStartDate(roundToMinutes(d as Date, 30))}
+              selected={roundToMinutes(start)}
+              onChange={(d) => d && setStart(roundToMinutes(d as Date, 30))}
               inline
               showTimeSelect
               timeFormat="HH:mm"
@@ -37,13 +44,17 @@ const DatePickerComponent = () => {
               calendarStartDay={1}
               locale={enUS}
             />
-            <StartDateInput
-              date={formatDate(startDate)}
-              setStartDate={setStartDate}
-            />
+            <StartDateInput date={formatDate(start)} setStartDate={setStart} />
           </TabItem>
           <TabItem label="Relative" id="rel">
-            <p>Tab #2.</p>
+            <RelativeDatePicker
+              unit={unit}
+              duration={duration}
+              setUnit={setUnit}
+              setDuration={setDuration}
+              date={formatDate(start)}
+              setStartDate={setStart}
+            />
           </TabItem>
           <TabItem label="Now" id="now">
             <p>Tab #3.</p>
