@@ -2,6 +2,9 @@
   --dark: #242424;
   --border: #b4c1d5;
   --blue: #1750ba;
+  --bg-color: #e3e8f2;
+  --violet: #6b3c9f;
+  --error: #c61e25;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

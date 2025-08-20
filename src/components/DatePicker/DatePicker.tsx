@@ -10,6 +10,7 @@ import Popover from "../Popover/Popover";
 import TabList from "../Tabs/TabList";
 import TabItem from "../Tabs/TabItem";
 import { roundToMinutes } from "../../utils/roundToMinutes";
+import StartDateInput from "../StartDateInput/StartDateInput";
 
 const DatePickerComponent = () => {
   const [startDate, setStartDate] = useState<Date>(() =>
@@ -35,6 +36,10 @@ const DatePickerComponent = () => {
               dateFormat="dd.MM.yyyy, HH:mm"
               calendarStartDay={1}
               locale={enUS}
+            />
+            <StartDateInput
+              date={formatDate(startDate)}
+              setStartDate={setStartDate}
             />
           </TabItem>
           <TabItem label="Relative" id="rel">
