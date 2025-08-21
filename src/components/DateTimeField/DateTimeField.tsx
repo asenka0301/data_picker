@@ -1,13 +1,13 @@
+import styles from "./DateTimeField.module.css";
 import { useEffect, useRef, useState, type FC } from "react";
-import styles from "./StartDateInput.module.css";
 import { validateDate } from "../../utils/dateValidation";
 
-type StartDateInputProps = {
+type DateTimeFieldProps = {
   date: string;
   setDate: (value: Date) => void;
 };
 
-const StartDateInput: FC<StartDateInputProps> = ({ date, setDate }) => {
+const DateTimeField: FC<DateTimeFieldProps> = ({ date, setDate }) => {
   const [value, setValue] = useState(date);
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,4 +66,4 @@ const StartDateInput: FC<StartDateInputProps> = ({ date, setDate }) => {
   );
 };
 
-export default StartDateInput;
+export default DateTimeField;

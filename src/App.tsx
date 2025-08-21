@@ -1,8 +1,8 @@
 import "./App.css";
-import DatePickerComponent from "./components/DatePicker/DatePicker";
+import DatePicker from "./components/DatePicker/DatePicker";
 
 function App() {
-  return <DatePickerComponent />;
+  return <DatePicker />;
 }
 
 export default App;

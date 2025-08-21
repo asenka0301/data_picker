@@ -1,20 +1,20 @@
 import styles from "./QuickSelect.module.css";
 import { useState, type ChangeEvent, type FC } from "react";
 import { add, sub } from "date-fns";
-import { toDuration, type Tense, type Unit } from "../../utils/formatDate";
-import Select from "../Select/Select";
-import Input from "../Input.tsx/Input";
+import { toDuration, type Tense, type Unit } from "../../../utils/formatDate";
+import {
+  DEFAULT_DURATION,
+  DEFAULT_TENSE,
+  DEFAULT_UNIT,
+} from "../../DatePicker/DatePicker";
+import { getRange } from "../../../utils/dateRanges";
+import Select from "../../Select/Select";
 import {
   RANGE_PRESETS,
   TENSE_OPTIONS,
   UNIT_OPTIONS,
-} from "../../constants/dateOptions";
-import { getRange } from "../../utils/dateRanges";
-import {
-  DEFAULT_DURATIN,
-  DEFAULT_TENSE,
-  DEFAULT_UNIT,
-} from "../DatePicker/DatePicker";
+} from "../../../constants/dateOptions";
+import Input from "../../Input.tsx/Input";
 
 type QuickSelectProps = {
   setStart: (start: Date) => void;
@@ -24,7 +24,7 @@ type QuickSelectProps = {
 const QuickSelect: FC<QuickSelectProps> = ({ setStart, setEnd }) => {
   const [tenseValue, setTenseValue] = useState<Tense>(DEFAULT_TENSE);
   const [unitValue, setUnitValue] = useState<Unit>(DEFAULT_UNIT);
-  const [durationValue, setDurationValue] = useState<number>(DEFAULT_DURATIN);
+  const [durationValue, setDurationValue] = useState<number>(DEFAULT_DURATION);
 
   const handleQuickClick = (id: string) => {
     const { start, end } = getRange(id);

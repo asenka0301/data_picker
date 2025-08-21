@@ -1,49 +1,67 @@
 import styles from "./RelativeDatePicker.module.css";
 import { toDuration, type Tense, type Unit } from "../../utils/formatDate";
-import { useEffect, useState, type ChangeEvent, type FC } from "react";
-import StartDateInput from "../StartDateInput/StartDateInput";
-import Input from "../Input.tsx/Input";
+import { useState, type ChangeEvent, type FC } from "react";
 import Select from "../Select/Select";
 import { add, sub } from "date-fns";
 import {
   RELATIVE_UNIT_OPTIONS,
   type RelValue,
 } from "../../constants/dateOptions";
-import {
-  DEFAULT_DURATIN,
-  DEFAULT_TENSE,
-  DEFAULT_UNIT,
-} from "../DatePicker/DatePicker";
+import DateTimeField from "../DateTimeField/DateTimeField";
+import Input from "../Input.tsx/Input";
 
 type RelativeDatePickerProps = {
   date: string;
   setDate: (value: Date) => void;
+  unit: Unit;
+  setUnit: (value: Unit) => void;
+  duration: number;
+  setDuration: (value: number) => void;
+  tense: Tense;
+  setTense: (value: Tense) => void;
 };
 
 const parseValue = (value: RelValue): [Tense, Unit] =>
   value.split(":") as [Tense, Unit];
 
-const RelativeDatePicker: FC<RelativeDatePickerProps> = ({ date, setDate }) => {
-  const [durationValue, setDurationValue] = useState<number>(DEFAULT_DURATIN);
-  const [unitValue, setUnitValue] = useState<Unit>(DEFAULT_UNIT);
-  const [tense, setTenseValue] = useState<Tense>(DEFAULT_TENSE);
+const RelativeDatePicker: FC<RelativeDatePickerProps> = ({
+  date,
+  setDate,
+  duration,
+  setDuration,
+  unit,
+  setUnit,
+  tense,
+  setTense,
+}) => {
+  const [durationValue, setDurationvalue] = useState<number>(duration);
+  const [unitValue, setUnitValue] = useState<Unit>(unit);
+  const [tenseValue, setTenseValue] = useState<Tense>(tense);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDurationValue(Number(e.target.value));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nextAmount = Number(e.target.value);
+    setDurationvalue(nextAmount);
+    setDuration(nextAmount);
+
+    const now = new Date();
+    const dur = toDuration(Math.max(0, nextAmount), unitValue);
+    const nextDate = tense === "last" ? sub(now, dur) : add(now, dur);
+    setDate(nextDate);
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const [nextTense, nextUnit] = parseValue(e.currentTarget.value as RelValue);
+    const value = e.currentTarget.value as RelValue;
+    const [nextTense, nextUnit] = parseValue(value);
     setTenseValue(nextTense);
+    setTense(nextTense);
     setUnitValue(nextUnit);
-  };
+    setUnit(nextUnit);
 
-  useEffect(() => {
     const now = new Date();
-    const duration = toDuration(Math.max(0, durationValue), unitValue);
-    const nextDate = tense === "last" ? sub(now, duration) : add(now, duration);
+    const dur = toDuration(Math.max(0, durationValue), nextUnit);
+    const nextDate = nextTense === "last" ? sub(now, dur) : add(now, dur);
     setDate(nextDate);
-  }, [durationValue, unitValue, tense, setDate]);
+  };
 
   return (
     <div className={styles.container}>
@@ -60,13 +78,13 @@ const RelativeDatePicker: FC<RelativeDatePickerProps> = ({ date, setDate }) => {
         <Select
           name="unit"
           id="unit"
-          defaultValue={`${tense}:${unitValue}`}
+          defaultValue={`${tenseValue}:${unitValue}`}
           onChange={handleSelectChange}
           className={styles.controlsItem}
           options={RELATIVE_UNIT_OPTIONS}
         />
       </div>
-      <StartDateInput date={date} setDate={setDate} />
+      <DateTimeField date={date} setDate={setDate} />
     </div>
   );
 };
