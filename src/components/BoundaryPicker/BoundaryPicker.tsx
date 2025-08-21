@@ -22,7 +22,7 @@ type BoundaryPickerProps = {
   positionClass: string;
   date: Date;
   setDate: (d: Date) => void;
-  isRangeInvalid: boolean;
+  isRangeInvalid?: boolean;
   range: Range;
 };
 

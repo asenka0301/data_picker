@@ -6,7 +6,7 @@ interface PopoverProps {
   title: string | ReactElement;
   btnClassName?: string;
   positionClass?: string;
-  isRangeInvalid: boolean;
+  isRangeInvalid?: boolean;
 }
 
 const Popover: FC<PopoverProps> = ({
