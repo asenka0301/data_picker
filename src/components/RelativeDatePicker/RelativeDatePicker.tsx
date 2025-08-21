@@ -84,7 +84,7 @@ const RelativeDatePicker: FC<RelativeDatePickerProps> = ({
           options={RELATIVE_UNIT_OPTIONS}
         />
       </div>
-      <DateTimeField date={date} setDate={setDate} />
+      <DateTimeField date={date} setDate={setDate} readOnly={true} />
     </div>
   );
 };

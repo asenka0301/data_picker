@@ -10,6 +10,11 @@
   gap: 10px;
 }
 
+.controls > * {
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .controlsItem {
   flex-grow: 1;
   width: 100%;

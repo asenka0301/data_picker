@@ -5,9 +5,14 @@ import { validateDate } from "../../utils/dateValidation";
 type DateTimeFieldProps = {
   date: string;
   setDate: (value: Date) => void;
+  readOnly: boolean;
 };
 
-const DateTimeField: FC<DateTimeFieldProps> = ({ date, setDate }) => {
+const DateTimeField: FC<DateTimeFieldProps> = ({
+  date,
+  setDate,
+  readOnly = false,
+}) => {
   const [value, setValue] = useState(date);
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +41,8 @@ const DateTimeField: FC<DateTimeFieldProps> = ({ date, setDate }) => {
       <div className={styles.container}>
         <div className={styles.text}>Start Date</div>
         <input
+          name="dateTimeField"
+          id="dateTimeField"
           ref={inputRef}
           type="text"
           className={`${styles.input} ${
@@ -46,6 +53,7 @@ const DateTimeField: FC<DateTimeFieldProps> = ({ date, setDate }) => {
             setValue(e.target.value);
             if (!touched) setTouched(true);
           }}
+          readOnly={readOnly}
         />
         {touched && (
           <button type="button" className={styles.btn} onClick={handleSave}>
