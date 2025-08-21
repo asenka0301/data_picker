@@ -17,16 +17,13 @@ import {
 
 type RelativeDatePickerProps = {
   date: string;
-  setStartDate: (value: Date) => void;
+  setDate: (value: Date) => void;
 };
 
 const parseValue = (value: RelValue): [Tense, Unit] =>
   value.split(":") as [Tense, Unit];
 
-const RelativeDatePicker: FC<RelativeDatePickerProps> = ({
-  date,
-  setStartDate,
-}) => {
+const RelativeDatePicker: FC<RelativeDatePickerProps> = ({ date, setDate }) => {
   const [durationValue, setDurationValue] = useState<number>(DEFAULT_DURATIN);
   const [unitValue, setUnitValue] = useState<Unit>(DEFAULT_UNIT);
   const [tense, setTenseValue] = useState<Tense>(DEFAULT_TENSE);
@@ -45,8 +42,8 @@ const RelativeDatePicker: FC<RelativeDatePickerProps> = ({
     const now = new Date();
     const duration = toDuration(Math.max(0, durationValue), unitValue);
     const nextDate = tense === "last" ? sub(now, duration) : add(now, duration);
-    setStartDate(nextDate);
-  }, [durationValue, unitValue, tense, setStartDate]);
+    setDate(nextDate);
+  }, [durationValue, unitValue, tense, setDate]);
 
   return (
     <div className={styles.container}>
@@ -69,7 +66,7 @@ const RelativeDatePicker: FC<RelativeDatePickerProps> = ({
           options={RELATIVE_UNIT_OPTIONS}
         />
       </div>
-      <StartDateInput date={date} setStartDate={setStartDate} />
+      <StartDateInput date={date} setDate={setDate} />
     </div>
   );
 };

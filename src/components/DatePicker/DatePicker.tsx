@@ -22,7 +22,7 @@ const DatePickerComponent = () => {
   const [start, setStart] = useState<Date>(() =>
     sub(new Date(), toDuration(DEFAULT_DURATIN, DEFAULT_UNIT))
   );
-  const [endDate, setEnd] = useState<Date>(() => new Date());
+  const [end, setEnd] = useState<Date>(() => new Date());
 
   return (
     <div className={styles.container}>
@@ -48,13 +48,10 @@ const DatePickerComponent = () => {
               calendarStartDay={1}
               locale={enUS}
             />
-            <StartDateInput date={formatDate(start)} setStartDate={setStart} />
+            <StartDateInput date={formatDate(start)} setDate={setStart} />
           </TabItem>
           <TabItem label="Relative" id="rel">
-            <RelativeDatePicker
-              date={formatDate(start)}
-              setStartDate={setStart}
-            />
+            <RelativeDatePicker date={formatDate(start)} setDate={setStart} />
           </TabItem>
           <TabItem label="Now" id="now">
             <p>Tab #3.</p>
@@ -62,13 +59,25 @@ const DatePickerComponent = () => {
         </TabList>
       </Popover>
       <span className={styles.arrow}></span>
-      <Popover title={formatDate(endDate)} positionClass="end">
+      <Popover title={formatDate(end)} positionClass="end">
         <TabList defaultActive="rel">
-          <TabItem label="Relative" id="rel">
-            <p>This is Tab #1</p>
-          </TabItem>
           <TabItem label="Absolute" id="abs">
-            <p>Tab #2.</p>
+            <DatePicker
+              selected={roundToMinutes(end)}
+              onChange={(d) => d && setEnd(roundToMinutes(d as Date, 30))}
+              inline
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={30}
+              timeCaption="Time"
+              dateFormat="dd.MM.yyyy, HH:mm"
+              calendarStartDay={1}
+              locale={enUS}
+            />
+            <StartDateInput date={formatDate(end)} setDate={setEnd} />
+          </TabItem>
+          <TabItem label="Relative" id="rel">
+            <RelativeDatePicker date={formatDate(end)} setDate={setEnd} />
           </TabItem>
           <TabItem label="Now" id="now">
             <p>Tab #3.</p>

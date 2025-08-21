@@ -4,10 +4,10 @@ import { validateDate } from "../../utils/dateValidation";
 
 type StartDateInputProps = {
   date: string;
-  setStartDate: (value: Date) => void;
+  setDate: (value: Date) => void;
 };
 
-const StartDateInput: FC<StartDateInputProps> = ({ date, setStartDate }) => {
+const StartDateInput: FC<StartDateInputProps> = ({ date, setDate }) => {
   const [value, setValue] = useState(date);
   const [touched, setTouched] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ const StartDateInput: FC<StartDateInputProps> = ({ date, setStartDate }) => {
       setValidationError(true);
       return;
     }
-    setStartDate(res.date);
+    setDate(res.date);
     setValidationError(false);
     setTouched(false);
   };
