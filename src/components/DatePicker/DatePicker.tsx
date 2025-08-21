@@ -1,6 +1,6 @@
 import styles from "./DatePicker.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toDuration } from "../../utils/formatDate";
 import { sub } from "date-fns";
 import BoundaryPicker from "../BoundaryPicker/BoundaryPicker";
@@ -16,6 +16,11 @@ const DatePicker = () => {
     sub(new Date(), toDuration(DEFAULT_DURATION, DEFAULT_UNIT))
   );
   const [end, setEnd] = useState<Date>(() => new Date());
+  const [isRangeInvalid, setIsRangeInvalid] = useState(false);
+
+  useEffect(() => {
+    setIsRangeInvalid(start > end);
+  }, [start, end]);
 
   return (
     <div className={styles.container}>
@@ -25,9 +30,23 @@ const DatePicker = () => {
         setStart={setStart}
         setEnd={setEnd}
       />
-      <BoundaryPicker date={start} setDate={setStart} positionClass="start" />
-      <span className={styles.arrow}></span>
-      <BoundaryPicker date={end} setDate={setEnd} positionClass="end" />
+      <BoundaryPicker
+        date={start}
+        setDate={setStart}
+        isRangeInvalid={isRangeInvalid}
+        positionClass="start"
+      />
+      <span
+        className={`${styles.arrow} ${
+          isRangeInvalid ? styles.redArrow : ""
+        }`.trim()}
+      ></span>
+      <BoundaryPicker
+        date={end}
+        setDate={setEnd}
+        isRangeInvalid={isRangeInvalid}
+        positionClass="end"
+      />
     </div>
   );
 };

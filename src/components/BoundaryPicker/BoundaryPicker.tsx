@@ -19,19 +19,25 @@ type BoundaryPickerProps = {
   positionClass: string;
   date: Date;
   setDate: (d: Date) => void;
+  isRangeInvalid: boolean;
 };
 
 const BoundaryPicker: FC<BoundaryPickerProps> = ({
   positionClass,
   date,
   setDate,
+  isRangeInvalid,
 }) => {
   const [unit, setUnit] = useState<Unit>(DEFAULT_UNIT);
   const [duration, setDuration] = useState<number>(DEFAULT_DURATION);
   const [tense, setTense] = useState<Tense>(DEFAULT_TENSE);
 
   return (
-    <Popover title={formatDate(date)} positionClass={positionClass}>
+    <Popover
+      title={formatDate(date)}
+      positionClass={positionClass}
+      isRangeInvalid={isRangeInvalid}
+    >
       <TabList defaultActive="rel">
         <TabItem label="Absolute" id="abs">
           <DatePicker

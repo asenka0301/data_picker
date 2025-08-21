@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.error {
+  color: var(--error);
+}
+
 .popoverContent {
   position: absolute;
   transform: translateX(-50%);

@@ -27,3 +27,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.redArrow {
+  background-image: url("../../assets/arrow-right-red.svg");
+}

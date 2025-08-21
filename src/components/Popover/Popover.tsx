@@ -6,6 +6,7 @@ interface PopoverProps {
   title: string | ReactElement;
   btnClassName?: string;
   positionClass?: string;
+  isRangeInvalid: boolean;
 }
 
 const Popover: FC<PopoverProps> = ({
@@ -13,6 +14,7 @@ const Popover: FC<PopoverProps> = ({
   title,
   btnClassName,
   positionClass,
+  isRangeInvalid,
 }): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -40,7 +42,9 @@ const Popover: FC<PopoverProps> = ({
       <button
         ref={triggerRef}
         onClick={toggleVisibility}
-        className={`${styles.popoverTrigger} ${btnClassName}`.trim()}
+        className={`${styles.popoverTrigger} ${btnClassName} ${
+          isRangeInvalid ? styles.error : ""
+        }`.trim()}
         aria-haspopup="true"
         aria-expanded={isVisible}
         aria-controls="popover-content"
