@@ -2,6 +2,8 @@ import type { Duration } from "date-fns/fp";
 
 export type Unit = "s" | "m" | "h" | "d" | "w" | "M" | "y";
 
+export type Tense = "last" | "next";
+
 export const formatDate = (d: Date) => {
   const datePart = new Intl.DateTimeFormat("en-US", {
     month: "short",

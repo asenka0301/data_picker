@@ -8,6 +8,16 @@
   border-radius: 4px;
 }
 
+.quickSelectBtn {
+  height: 40px;
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--border);
+}
+
+.quickSelectBtn:hover {
+  background-color: var(--bg-color-hover);
+}
+
 .arrow {
   display: block;
   width: 16px;

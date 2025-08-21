@@ -1,16 +1,19 @@
 import styles from "./Popover.module.css";
 import { useState, useRef, type FC, useEffect, type ReactElement } from "react";
 
-type Preset = { label: string };
-
-export type Presets = Array<Preset>;
-
 interface PopoverProps {
   children: ReactElement;
   title: string | ReactElement;
+  btnClassName?: string;
+  positionClass?: string;
 }
 
-const Popover: FC<PopoverProps> = ({ children, title }): ReactElement => {
+const Popover: FC<PopoverProps> = ({
+  children,
+  title,
+  btnClassName,
+  positionClass,
+}): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -37,7 +40,7 @@ const Popover: FC<PopoverProps> = ({ children, title }): ReactElement => {
       <button
         ref={triggerRef}
         onClick={toggleVisibility}
-        className={styles.popoverTrigger}
+        className={`${styles.popoverTrigger} ${btnClassName}`.trim()}
         aria-haspopup="true"
         aria-expanded={isVisible}
         aria-controls="popover-content"
@@ -48,7 +51,9 @@ const Popover: FC<PopoverProps> = ({ children, title }): ReactElement => {
         <div
           id="popover-content"
           ref={popoverRef}
-          className={styles.popoverContent}
+          className={`${styles.popoverContent} ${
+            styles[`${positionClass}`]
+          }`.trim()}
           role="dialog"
           aria-modal="true"
         >

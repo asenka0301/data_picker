@@ -3,8 +3,11 @@
   --border: #b4c1d5;
   --blue: #1750ba;
   --bg-color: #e3e8f2;
+  --bg-color-hover: #d3e0f8;
   --violet: #6b3c9f;
   --error: #c61e25;
+  --btn-blue: #cbdaef;
+  --btn-hover: #91bdf9;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -17,4 +20,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
 }
