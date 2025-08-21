@@ -14,12 +14,16 @@ import TabItem from "../Tabs/TabItem";
 import StartDateInput from "../DateTimeField/DateTimeField";
 import RelativeDatePicker from "../RelativeDatePicker/RelativeDatePicker";
 import DatePicker from "react-datepicker";
+import NowDateTimePicker from "../NowDateTimePicker/NowDateTimePicker";
+
+export type Range = "start" | "end";
 
 type BoundaryPickerProps = {
   positionClass: string;
   date: Date;
   setDate: (d: Date) => void;
   isRangeInvalid: boolean;
+  range: Range;
 };
 
 const BoundaryPicker: FC<BoundaryPickerProps> = ({
@@ -27,6 +31,7 @@ const BoundaryPicker: FC<BoundaryPickerProps> = ({
   date,
   setDate,
   isRangeInvalid,
+  range,
 }) => {
   const [unit, setUnit] = useState<Unit>(DEFAULT_UNIT);
   const [duration, setDuration] = useState<number>(DEFAULT_DURATION);
@@ -67,7 +72,7 @@ const BoundaryPicker: FC<BoundaryPickerProps> = ({
           />
         </TabItem>
         <TabItem label="Now" id="now">
-          <p>Tab #3.</p>
+          <NowDateTimePicker setDate={setDate} range={range} />
         </TabItem>
       </TabList>
     </Popover>

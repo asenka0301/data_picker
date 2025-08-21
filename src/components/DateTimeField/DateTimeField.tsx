@@ -5,7 +5,7 @@ import { validateDate } from "../../utils/dateValidation";
 type DateTimeFieldProps = {
   date: string;
   setDate: (value: Date) => void;
-  readOnly: boolean;
+  readOnly?: boolean;
 };
 
 const DateTimeField: FC<DateTimeFieldProps> = ({

@@ -35,6 +35,7 @@ const DatePicker = () => {
         setDate={setStart}
         isRangeInvalid={isRangeInvalid}
         positionClass="start"
+        range="start"
       />
       <span
         className={`${styles.arrow} ${
@@ -46,6 +47,7 @@ const DatePicker = () => {
         setDate={setEnd}
         isRangeInvalid={isRangeInvalid}
         positionClass="end"
+        range="end"
       />
     </div>
   );
